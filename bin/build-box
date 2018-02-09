@@ -46,5 +46,4 @@ args() {
 # main
 args "$@"
 
-version=$(cat VERSION)
-packer build ${only} -var-file=${var_file} -var "version=${version}" ${packer_template}
+packer build ${only} -var-file=${var_file} ${packer_template}
