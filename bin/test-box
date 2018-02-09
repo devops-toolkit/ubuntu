@@ -6,7 +6,7 @@ if [ "${DEBUG:=false}" = "true" ]; then
 fi
 
 usage() {
-  echo "usage: $(basename $0) BOX_PATH [vmware|virtualbox|parallels]"
+  echo "usage: $(basename $0) BOX_PATH [virtualbox|parallels]"
   echo
   echo "Run automated tests against a local *.box file"
 }
@@ -17,9 +17,9 @@ args() {
     exit 0
   fi
 
-  if [[ ! $2 =~ ^(vmware|virtualbox|parallels)$ ]]; then
+  if [[ ! $2 =~ ^(virtualbox|parallels)$ ]]; then
     echo "$(basename $0): illegal platform $2"
-    echo "Valid platforms: vmware|virtualbox|parallels"
+    echo "Valid platforms: virtualbox|parallels"
     usage
     exit 1
   fi
@@ -27,14 +27,6 @@ args() {
   box_path=$1
   box_provider=$2
   vagrant_provider=${3:-${box_provider}}
-  if [ "$box_provider" = "vmware" ]; then
-    box_provider=vmware_desktop
-    if [[ $OSTYPE =~ darwin ]]; then
-      vagrant_provider=vmware_fusion
-    else
-      vagrant_provider=vmware_workstation
-    fi
-  fi
   SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
   test_src_path=${SCRIPT_DIR}/../test/*_spec.rb
 }

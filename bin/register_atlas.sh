@@ -98,7 +98,6 @@ get_short_description() {
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
     PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
-    VMWARE_VERSION=10.0.10
     SHORT_DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}"
 }
 
@@ -152,18 +151,12 @@ create_description() {
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
     PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
-    VMWARE_VERSION=10.0.10
 
-    VMWARE_BOX_FILE=box/vmware/${BOX_NAME}${BOX_SUFFIX}
     VIRTUALBOX_BOX_FILE=box/virtualbox/${BOX_NAME}${BOX_SUFFIX}
     PARALLELS_BOX_FILE=box/parallels/${BOX_NAME}${BOX_SUFFIX}
     DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}
 
 "
-    if [[ -e ${VMWARE_BOX_FILE} ]]; then
-        FILESIZE=$(du -k -h "${VMWARE_BOX_FILE}" | cut -f1)
-        DESCRIPTION=${DESCRIPTION}"VMWare ${FILESIZE}B/"
-    fi
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         FILESIZE=$(du -k -h "${VIRTUALBOX_BOX_FILE}" | cut -f1)
         DESCRIPTION=${DESCRIPTION}"VirtualBox ${FILESIZE}B/"
@@ -174,11 +167,6 @@ create_description() {
     fi
     DESCRIPTION=${DESCRIPTION%?}
 
-    if [[ -e ${VMWARE_BOX_FILE} ]]; then
-        DESCRIPTION="${DESCRIPTION}
-
-VMware Tools ${VMWARE_VERSION}"
-    fi
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         DESCRIPTION="${DESCRIPTION}
 
@@ -252,11 +240,6 @@ atlas_publish() {
     fi
 
     BOXCUTTER_BASE_URL=http://cdn.boxcutter.io/ubuntu
-    if [[ -e ${VMWARE_BOX_FILE} ]]; then
-        PROVIDER=vmware_desktop
-        PROVIDER_URL=${BOXCUTTER_BASE_URL}/vmware${VMWARE_VERSION}/${BOX_NAME}${BOX_SUFFIX}
-        publish_provider ${atlas_username} ${atlas_access_token}
-    fi
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         PROVIDER=virtualbox
         PROVIDER_URL=${BOXCUTTER_BASE_URL}/virtualbox${VIRTUALBOX_VERSION}/${BOX_NAME}${BOX_SUFFIX}

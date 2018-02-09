@@ -10,8 +10,8 @@ We no longer provide pre-built binaries for these templates.
 
 ## Building the Vagrant boxes with Packer
 
-To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads), 
-[VMware Fusion](https://www.vmware.com/products/fusion)/[VMware Workstation](https://www.vmware.com/products/workstation) and
+To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads) 
+and
 [Parallels](http://www.parallels.com/products/desktop/whats-new/) installed.
 
 Parallels requires that the
@@ -36,7 +36,6 @@ The boxcutter templates currently support the following desktop virtualization s
 
 * `parallels-iso` - [Parallels](http://www.parallels.com/products/desktop/whats-new/) desktop virtualization (Requires the Pro Edition - Desktop edition won't work)
 * `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
-* `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
 
 ## Building the Vagrant boxes with the box script
 
