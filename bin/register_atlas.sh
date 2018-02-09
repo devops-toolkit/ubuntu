@@ -97,7 +97,6 @@ get_short_description() {
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
-    PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
     SHORT_DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}"
 }
 
@@ -150,10 +149,8 @@ create_description() {
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
-    PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
 
     VIRTUALBOX_BOX_FILE=box/virtualbox/${BOX_NAME}${BOX_SUFFIX}
-    PARALLELS_BOX_FILE=box/parallels/${BOX_NAME}${BOX_SUFFIX}
     DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}
 
 "
@@ -161,21 +158,12 @@ create_description() {
         FILESIZE=$(du -k -h "${VIRTUALBOX_BOX_FILE}" | cut -f1)
         DESCRIPTION=${DESCRIPTION}"VirtualBox ${FILESIZE}B/"
     fi
-    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
-        FILESIZE=$(du -k -h "${PARALLELS_BOX_FILE}" | cut -f1)
-        DESCRIPTION=${DESCRIPTION}"Parallels ${FILESIZE}B/"
-    fi
     DESCRIPTION=${DESCRIPTION%?}
 
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         DESCRIPTION="${DESCRIPTION}
 
 VirtualBox Guest Additions ${VIRTUALBOX_VERSION}"
-    fi
-    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
-        DESCRIPTION="${DESCRIPTION}
-
-Parallels Tools ${PARALLELS_VERSION}"
     fi
 
     VERSION_JSON=$(
@@ -243,11 +231,6 @@ atlas_publish() {
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         PROVIDER=virtualbox
         PROVIDER_URL=${BOXCUTTER_BASE_URL}/virtualbox${VIRTUALBOX_VERSION}/${BOX_NAME}${BOX_SUFFIX}
-        publish_provider ${atlas_username} ${atlas_access_token}
-    fi
-    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
-        PROVIDER=parallels
-        PROVIDER_URL=${BOXCUTTER_BASE_URL}/parallels${PARALLELS_VERSION}/${BOX_NAME}${BOX_SUFFIX}
         publish_provider ${atlas_username} ${atlas_access_token}
     fi
 

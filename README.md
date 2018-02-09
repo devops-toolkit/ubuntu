@@ -11,12 +11,7 @@ We no longer provide pre-built binaries for these templates.
 ## Building the Vagrant boxes with Packer
 
 To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads) 
-and
-[Parallels](http://www.parallels.com/products/desktop/whats-new/) installed.
-
-Parallels requires that the
-[Parallels Virtualization SDK for Mac](http://www.parallels.com/downloads/desktop)
-be installed as an additional preqrequisite.
+installed.
 
 We make use of JSON files containing user variables to build specific versions of Ubuntu.
 You tell `packer` to use a specific user variable file via the `-var-file=` command line
@@ -34,7 +29,6 @@ parameter.  For example, to build Ubuntu 16.04 for VirtualBox:
 
 The boxcutter templates currently support the following desktop virtualization strings:
 
-* `parallels-iso` - [Parallels](http://www.parallels.com/products/desktop/whats-new/) desktop virtualization (Requires the Pro Edition - Desktop edition won't work)
 * `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
 
 ## Building the Vagrant boxes with the box script
@@ -153,11 +147,6 @@ The default is `custom-script.sh` which does nothing.
 Contact moujan@annawake.com 
 
 ### Acknowledgments
-
-[Parallels](http://www.parallels.com/) provided a Business Edition license of
-their software to run on the basebox build farm.
-
-<img src="http://www.parallels.com/fileadmin/images/corporate/brand-assets/images/logo-knockout-on-red.jpg" width="80">
 
 [SmartyStreets](http://www.smartystreets.com) provided basebox hosting for the box-cutter project since 2015 - thank you for your support!
 

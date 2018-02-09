@@ -6,7 +6,7 @@ if [ "${DEBUG:=false}" = "true" ]; then
 fi
 
 usage() {
-  echo "usage: $(basename $0) BOX_NAME [virtualbox|parallels]"
+  echo "usage: $(basename $0) BOX_NAME [virtualbox]"
   echo
   echo "Download BOX_NAME from Atlas and run automated tests against it"
 }
@@ -17,9 +17,9 @@ args() {
     exit 0
   fi
 
-  if [[ ! $2 =~ ^(virtualbox|parallels)$ ]]; then
+  if [[ ! $2 =~ ^(virtualbox)$ ]]; then
     echo "$(basename $0): illegal platform $2"
-    echo "Valid platforms: virtualbox|parallels"
+    echo "Valid platforms: virtualbox"
     usage
     exit 1
   fi

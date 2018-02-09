@@ -1,6 +1,6 @@
 BOX_VERSION ?= $(shell cat VERSION)
 BOX_SUFFIX := -$(BOX_VERSION).box
-BUILDER_TYPES ?= virtualbox parallels
+BUILDER_TYPES ?= virtualbox
 TEMPLATE_FILENAMES := $(filter-out ubuntu.json,$(wildcard *.json))
 BOX_NAMES := $(basename $(TEMPLATE_FILENAMES))
 BOX_FILENAMES := $(TEMPLATE_FILENAMES:.json=$(BOX_SUFFIX))
@@ -8,22 +8,18 @@ VIRTUALBOX_BOX_DIR ?= box/virtualbox
 VIRTUALBOX_TEMPLATE_FILENAMES = $(TEMPLATE_FILENAMES)
 VIRTUALBOX_BOX_FILENAMES := $(VIRTUALBOX_TEMPLATE_FILENAMES:.json=$(BOX_SUFFIX))
 VIRTUALBOX_BOX_FILES := $(foreach box_filename, $(VIRTUALBOX_BOX_FILENAMES), $(VIRTUALBOX_BOX_DIR)/$(box_filename))
-PARALLELS_BOX_DIR ?= box/parallels
-PARALLELS_TEMPLATE_FILENAMES = $(TEMPLATE_FILENAMES)
-PARALLELS_BOX_FILENAMES := $(PARALLELS_TEMPLATE_FILENAMES:.json=$(BOX_SUFFIX))
-PARALLELS_BOX_FILES := $(foreach box_filename, $(PARALLELS_BOX_FILENAMES), $(PARALLELS_BOX_DIR)/$(box_filename))
-BOX_FILES := $(VIRTUALBOX_BOX_FILES) $(PARALLELS_BOX_FILES)
+BOX_FILES := $(VIRTUALBOX_BOX_FILES)
 
-box/virtualbox/%$(BOX_SUFFIX) box/parallels/%$(BOX_SUFFIX): %.json
+box/virtualbox/%$(BOX_SUFFIX): %.json
 	bin/box build $<
 
-.PHONY: all clean assure deliver assure_atlas assure_atlas_virtualbox assure_atlas_parallels
+.PHONY: all clean assure deliver assure_atlas assure_atlas_virtualbox
 
 all: build assure deliver
 
 build: $(BOX_FILES)
 
-assure: assure_virtualbox assure_parallels
+assure: assure_virtualbox
 
 assure_virtualbox: $(VIRTUALBOX_BOX_FILES)
 	@for virtualbox_box_file in $(VIRTUALBOX_BOX_FILES) ; do \
@@ -31,26 +27,13 @@ assure_virtualbox: $(VIRTUALBOX_BOX_FILES)
 		bin/box test $$virtualbox_box_file virtualbox ; \
 	done
 
-assure_parallels: $(PARALLELS_BOX_FILES)
-	@for parallels_box_file in $(PARALLELS_BOX_FILES) ; do \
-		echo Checking $$parallels_box_file ; \
-		bin/box test $$parallels_box_file parallels ; \
-	done
-
-assure_atlas: assure_atlas_virtualbox assure_atlas_parallels
+assure_atlas: assure_atlas_virtualbox
 
 assure_atlas_virtualbox:
 	@for box_name in $(BOX_NAMES) ; do \
 		echo Checking $$box_name ; \
 		bin/test-vagrantcloud-box box-cutter/$$box_name virtualbox ; \
 		bin/test-vagrantcloud-box boxcutter/$$box_name virtualbox ; \
-	done
-
-assure_atlas_parallels:
-	@for box_name in $(BOX_NAMES) ; do \
-		echo Checking $$box_name ; \
-		bin/test-vagrantcloud-box box-cutter/$$box_name parallels ; \
-		bin/test-vagrantcloud-box boxcutter/$$box_name parallels ; \
 	done
 
 deliver:
