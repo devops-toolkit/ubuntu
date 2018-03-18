@@ -21,7 +21,7 @@
       ],
       "disk_size": "{{ user `disk_size` }}",
       "floppy_files": [
-        "http/{{ user `preseed` }}"
+        "http/ubuntu/{{ user `preseed` }}"
       ],
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "{{ user `virtualbox_guest_os_type` }}",
@@ -90,14 +90,14 @@
       ],
       "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
-        "script/update.sh",
-        "script/vagrant.sh",
-        "script/sshd.sh",
-        "script/virtualbox.sh",
-        "script/motd.sh",
+        "script/ubuntu/update.sh",
+        "script/ubuntu/vagrant.sh",
+        "script/ubuntu/sshd.sh",
+        "script/ubuntu/virtualbox.sh",
+        "script/ubuntu/motd.sh",
         "{{user `custom_script`}}",
-        "script/minimize.sh",
-        "script/cleanup.sh"
+        "script/ubuntu/minimize.sh",
+        "script/ubuntu/cleanup.sh"
       ],
       "type": "shell",
       "expect_disconnect": "true"
