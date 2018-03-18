@@ -91,7 +91,6 @@
       "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
         "script/update.sh",
-        "script/desktop.sh",
         "script/vagrant.sh",
         "script/sshd.sh",
         "script/virtualbox.sh",
