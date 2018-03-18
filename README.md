@@ -1,4 +1,4 @@
-# Packer templates for Ubuntu
+# Packer templates for Ubuntu and Debian
 
 ## Overview
 
@@ -18,7 +18,7 @@ this project is limited in scope:
 
 - virtualization software: VirtualBox only
 - cpu architecture: amd64 only
-- OS: Ubuntu (and Debian in the future)
+- OS: Ubuntu and Debian
 - no boxes with desktop enviroment
 
 ## Main differences with boxcutter/ubuntu
@@ -108,4 +108,6 @@ The default is `custom-script.sh` which does nothing.
 
 ## Acknowledgments
 
-Original project: [https://github.com/boxcutter/ubuntu](https://github.com/boxcutter/ubuntu).
+Original projects:
+- [https://github.com/boxcutter/ubuntu](https://github.com/boxcutter/ubuntu)
+- [https://github.com/boxcutter/debian](https://github.com/boxcutter/debian)
