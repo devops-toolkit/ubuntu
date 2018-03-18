@@ -46,13 +46,13 @@ echo "==> Clearing last login information"
 >/var/log/wtmp
 >/var/log/btmp
 
-# Whiteout root
+echo "==> Whiteout root"
 count=$(df --sync -kP / | tail -n1  | awk -F ' ' '{print $4}')
 let count--
 dd if=/dev/zero of=/tmp/whitespace bs=1024 count=$count
 rm /tmp/whitespace
 
-# Whiteout /boot
+echo "==> Whiteout /boot"
 count=$(df --sync -kP /boot | tail -n1 | awk -F ' ' '{print $4}')
 let count--
 dd if=/dev/zero of=/boot/whitespace bs=1024 count=$count
@@ -75,7 +75,7 @@ if [ "x${swapuuid}" != "x" ]; then
     /sbin/mkswap -U "${swapuuid}" "${swappart}"
 fi
 
-# Zero out the free space to save space in the final image
+echo "==> Zero out the free space to save space in the final image"
 dd if=/dev/zero of=/EMPTY bs=1M  || echo "dd exit code $? is suppressed"
 rm -f /EMPTY
 
