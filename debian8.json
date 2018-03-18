@@ -1,6 +1,8 @@
 {
   "_comment": "Build with `packer build -var-file=debian8.json debian.json`",
   "vm_name": "debian8",
+  "vm_description": "Debian 8 Jessie",
+  "version": "0.0.1",
   "cpus": "1",
   "disk_size": "65536",
   "iso_checksum": "a2e3bf4dfce4a1fd6756049cb272d7f5e86bf0da",

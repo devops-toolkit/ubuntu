@@ -44,12 +44,22 @@
     }
   ],
   "post-processors": [
-    {
-      "keep_input_artifact": false,
-      "output": "box/{{.Provider}}/{{ user `vm_name` }}-{{ user `version` }}.box",
-      "type": "vagrant",
-      "vagrantfile_template": "{{ user `vagrantfile_template` }}"
-    }
+    [
+      {
+        "keep_input_artifact": false,
+        "output": "box/{{.Provider}}/{{ user `vm_name` }}-{{ user `version` }}.box",
+        "type": "vagrant",
+        "vagrantfile_template": "{{ user `vagrantfile_template` }}"
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "{{user `vagrant_cloud_username`}}/{{user `vm_name`}}",
+        "access_token": "{{user `vagrant_cloud_access_token`}}",
+        "version": "{{user `version`}}",
+        "version_description": "{{user `vm_description`}}",
+        "no_release": "true"
+      }
+    ]
   ],
   "provisioners": [
     {
@@ -110,6 +120,8 @@
     "version": "0.1.0",
     "virtualbox_guest_os_type": "Debian_64",
     "vm_name": "debian82",
-    "vmware_guest_os_type": "debian8-64"
+    "vmware_guest_os_type": "debian8-64",
+    "vagrant_cloud_access_token": "{{env `VAGRANT_CLOUD_ACCESS_TOKEN`}}",
+    "vagrant_cloud_username": "{{env `VAGRANT_CLOUD_USERNAME`}}"
   }
 }
