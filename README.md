@@ -2,8 +2,9 @@
 
 ## Overview
 
-This repository contains [Packer](https://packer.io/) templates for creating Ubuntu Vagrant boxes.
-This is a fork of [boxcutter/ubuntu](https://github.com/boxcutter/ubuntu).  boxcutter stopped
+This repository contains [Packer](https://packer.io/) templates for creating Ubuntu and Debian vagrant boxes.
+This is a fork of [boxcutter/ubuntu](https://github.com/boxcutter/ubuntu) and
+[boxcutter/debian](https://github.com/boxcutter/debian).  boxcutter stopped
 to provide builded boxes in [October 2017](https://github.com/boxcutter/ubuntu/commit/d7c9ecbd525ec57b94be79ead388909a7cb7c7b4)
 and it seems [they don't indent to do it anymore](https://github.com/boxcutter/ubuntu/issues/133).
 
