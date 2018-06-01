@@ -9,10 +9,6 @@ rm -rf /dev/.udev/
 rm /lib/udev/rules.d/75-persistent-net-generator.rules
 
 echo "==> Cleaning up leftover dhcp leases"
-# Ubuntu 10.04
-if [ -d "/var/lib/dhcp3" ]; then
-    rm /var/lib/dhcp3/*
-fi
 # Ubuntu 12.04 & 14.04
 if [ -d "/var/lib/dhcp" ]; then
     rm /var/lib/dhcp/*

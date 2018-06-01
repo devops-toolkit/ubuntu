@@ -64,7 +64,6 @@
   "provisioners": [
     {
       "environment_vars": [
-        "DESKTOP={{user `desktop`}}",
         "REMOVE_DOCS={{user `remove_docs`}}",
         "UPDATE={{user `update`}}",
         "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
@@ -95,32 +94,23 @@
   ],
   "variables": {
     "cpus": "1",
-    "desktop": "false",
     "disk_size": "65536",
     "ftp_proxy": "{{env `ftp_proxy`}}",
     "headless": "",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
     "install_vagrant_key": "true",
-    "iso_checksum": "40f51a36b39c180fe46d7393e5a3a3985072ffc2",
-    "iso_checksum_type": "sha1",
-    "iso_name": "debian-8.2.0-amd64-DVD-1.iso",
-    "iso_path": "/Volumes/Storage/software/debian",
-    "iso_url": "iso/debian-8.2.0-amd64-DVD-1.iso",
+    "iso_path": "./iso",
     "memory": "512",
     "no_proxy": "{{env `no_proxy`}}",
-    "parallels_guest_os_type": "debian",
-    "preseed": "preseed-jessie.cfg",
+    "preseed" : "preseed.cfg",
     "rsync_proxy": "{{env `rsync_proxy`}}",
     "remove_docs": "true",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
-    "update": "false",
+    "update": "true",
     "vagrantfile_template": "",
-    "version": "0.1.0",
     "virtualbox_guest_os_type": "Debian_64",
-    "vm_name": "debian82",
-    "vmware_guest_os_type": "debian8-64",
     "vagrant_cloud_access_token": "{{env `VAGRANT_CLOUD_ACCESS_TOKEN`}}",
     "vagrant_cloud_username": "{{env `VAGRANT_CLOUD_USERNAME`}}"
   }
