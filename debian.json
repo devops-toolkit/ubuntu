@@ -79,6 +79,7 @@
       "scripts": [
         "script/debian/remove-cdrom-sources.sh",
         "script/debian/systemd.sh",
+        "script/debian/add-software.sh",
         "script/debian/update.sh",
         "script/debian/vagrant.sh",
         "script/debian/virtualbox.sh",

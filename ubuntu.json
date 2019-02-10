@@ -91,6 +91,7 @@
       "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
         "script/ubuntu/setup-locale.sh",
+        "script/debian/add-software.sh",
         "script/ubuntu/update.sh",
         "script/ubuntu/vagrant.sh",
         "script/ubuntu/sshd.sh",
