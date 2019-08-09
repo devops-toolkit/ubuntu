@@ -2,6 +2,10 @@
 
 ## Ubuntu 18.04
 
+### 2019-08-09, 1.0.2
+
+- switch to 18.04.3 release
+
 ### 2019-02-10, 1.0.1
 
 - install packages python and python-apt so that Ansible can work with this box right away
@@ -13,6 +17,10 @@
 - setting up locale en_US.UTF-8 to better support non-ascii characters in the console
 
 ## Ubuntu 16.04
+
+### 2019-08-09, 1.0.2
+
+- switch to 16.04.6 release
 
 ### 2019-02-10, 1.0.1
 
